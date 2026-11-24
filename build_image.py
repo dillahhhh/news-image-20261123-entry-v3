@@ -26,6 +26,26 @@
 #   every verified timed event on 23 Nov belongs to one of the 15 stories,
 #   so the timeline is a chronological recap and its slots now carry
 #   distinct facets/wording instead of verbatim repeats.
+# Revision 2 (Nemotron, 25 Nov 2026):
+# - Hero kicker "WAR • LIBYA" -> "WAR • UKRAINE": the label clashed with
+#   the headline's subject (Ukraine); the location stays in the deck
+#   ("off Libya") and the deck now names the "Russian corvette Merkury"
+#   outright, so the ship needs no separate footnote.
+# - Timeline 09:00 slot swapped NATO -> Merkury sinking (first reported
+#   09:00 UTC, verified in stories.json): 3 of 4 timeline slots are now
+#   pin-unique (Merkury/hero, Amtrak, EU); only 18:30 still recaps a pin
+#   (#1, as the "shadow banks" facet). Nemotron's example headlines were
+#   fabricated and were NOT used; the swap uses a verified timed event.
+# - Stats bar: every stat now carries its source inline (BusinessWorld /
+#   AP, AP, Daily Summary). Footer adds the "Every story verified
+#   against 2+ sources" trust line; DATE CHECK box itself untouched.
+# - 15-story structure made explicit: masthead strip says "15 STORIES",
+#   timeline header notes "2 MORE STORIES: AMTRAK + EU SANCTIONS".
+# - Polish: icons/palette verified consistent (red numbered pins, colour
+#   kicker bands, navy/red/cream); NVIDIA sparkline already exists (chart
+#   line behind the chip). House-seat donut NOT added: verified seats
+#   (258 Dem + 173 Rep = 431) do not sum to 435 and the number already
+#   communicates; a donut would cost space and invite a wrong total.
 # - Map: North America polygon redrawn (real Mexico/Central America +
 #   Florida peninsula) and South America north coast redrawn, so pins #8
 #   (Mexico City) and #9 (Cucuta) sit on land instead of in the Pacific;
@@ -69,7 +89,9 @@ def font(path, size):
 
 
 def wrap(draw, text, fnt, max_w):
-    words = text.split()
+    # Split on plain spaces only: a non-breaking space (U+00A0) inside a
+    # phrase such as "(Daily Summary)" must keep that phrase on one line.
+    words = [w for w in text.split(" ") if w != ""]
     lines, cur = [], ""
     for word in words:
         trial = (cur + " " + word).strip()
@@ -102,7 +124,8 @@ def centered(draw, cx, y, text, fnt, fill):
 # (written alongside this script in the repo). Numbers verified twice.
 # The image carries all 15 distinct stories: 3 heroes + 9 map stories +
 # the Democrats' 258 seats (stats bar) + the EU sanctions and Amtrak
-# derailment (UTC timeline).
+# derailment (UTC timeline; the timeline's other two slots recap the
+# 09:00 Merkury sinking and the 18:30 Iran sanctions as dated moments).
 # ---------------------------------------------------------------------------
 
 HEROES = [
@@ -115,10 +138,10 @@ HEROES = [
         "stat": "NASDAQ +7%  •  SOX +14%",
     },
     {
-        "kicker": "WAR  •  LIBYA",
+        "kicker": "WAR  •  UKRAINE",
         "color": RED,
         "head": "UKRAINE SINKS RUSSIAN WARSHIP",
-        "deck": "Seven sea drones sink corvette Merkury off Libya, Kyiv says.",
+        "deck": "Seven sea drones sink Russian corvette Merkury off Libya, Kyiv says.",
         "art": "ship",
         "stat": "First reported 09:00 UTC",
     },
@@ -148,14 +171,14 @@ MAP_STORIES = [
 ]
 
 STATS = [
-    ("$1.62bn", "India aid to flood-hit Nepal"),
-    ("258", "Democrats win House seats, most since 1992"),
-    ("24", "killed in Indonesia fire"),
-    ("7", "drones sank the Merkury"),
+    ("$1.62bn", "India aid to flood-hit Nepal (BusinessWorld / AP)"),
+    ("258", "Democrats win House seats, most since 1992 (AP)"),
+    ("24", "killed in Indonesia fire (BusinessWorld / AP)"),
+    ("7", "drones sank the Merkury (Daily Summary)"),
 ]
 
 TIMELINE = [
-    ("09:00", "NATO meets over Poland crisis"),
+    ("09:00", "Sea drones sink Russian warship"),
     ("14:32", "Amtrak derails, Louisiana"),
     ("17:47", "EU proposes new sanctions"),
     ("18:30", "US sanctions Iran shadow banks"),
@@ -352,7 +375,7 @@ def draw_masthead(draw):
     draw.rectangle([(0, 128), (W, 164)], fill=RED)
     f3 = font(F_SANS_B, 20)
     centered(draw, W // 2, 140,
-             "MONDAY'S WORLD NEWS  •  ALL TIMES UTC",
+             "MONDAY'S WORLD NEWS  •  15 STORIES  •  ALL TIMES UTC",
              f3, WHITE)
 
 
@@ -456,6 +479,11 @@ def draw_map_section(draw):
 def draw_timeline(draw, y0):
     fh = font(F_SANS_B, 20)
     draw.text((16, y0), "THE DAY IN UTC", font=fh, fill=NAVY)
+    # explicit mapping: the timeline carries 2 more stories (Amtrak, EU)
+    fnote = font(F_SANS, 14)
+    note = "2 MORE STORIES: AMTRAK + EU SANCTIONS"
+    centered(draw, W - 16 - draw.textlength(note, font=fnote) / 2, y0 + 4,
+             note, fnote, GREY)
     draw.line([(16, y0 + 26), (W - 16, y0 + 26)], fill=NAVY, width=2)
     col = (W - 32) // 4
     for i, (t, what) in enumerate(TIMELINE):
@@ -482,7 +510,7 @@ def draw_bottom(draw):
               font=f, fill=INK)
     ff = font(F_SANS, 13)
     centered(draw, W // 2, 1006,
-             "Sources: Reuters • AP • CNN • Carbon Brief • Le Monde  •  15 stories  •  make.fun news-image-20261123",
+             "Sources: Reuters • AP • CNN • Carbon Brief • Le Monde  •  Every story verified against 2+ sources  •  15 stories  •  make.fun news-image-20261123",
              ff, GREY)
 
 

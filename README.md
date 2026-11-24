@@ -8,8 +8,12 @@ One image that sums up Monday 23 November 2026: 15 verified stories in
 English, built to be read at a glance. Three illustrated heroes — Huang back
 at Nvidia (+31.5%), Ukraine sinking the Russian corvette Merkury off Libya,
 COP31 ending with no deal — plus a numbered world map with 9 more stories,
-a stats bar, a UTC timeline and a DATE CHECK box that is honest about the two
-Sunday-evening results (COP31, Democrats' 258th seat) confirmed on Monday.
+a stats bar (each stat sourced), a UTC timeline and a DATE CHECK box that is
+honest about the two Sunday-evening results (COP31, Democrats' 258th seat)
+confirmed on Monday. The 15 break down as 3 heroes + 9 on the map + the
+Democrats' 258 seats in the stats bar + 2 more stories in the timeline
+(Amtrak derailment, EU sanctions); the timeline's other two slots are the
+day's dated moments (09:00 Merkury sinking, 18:30 Iran sanctions).
 
 ## Why this design
 
@@ -25,8 +29,9 @@ against at least two independent sources (see `stories.json`).
   renderer produces identical bytes.
 - `build_image.py` — renderer (Python + PIL, no network): masthead, three
   illustrated hero panels (middle hero wider — the Ukraine warship story
-  leads), stats bar, schematic world map with numbered pins, UTC timeline,
-  DATE CHECK box, sources footer. The image carries 15 distinct stories:
+  leads, kicker WAR • UKRAINE), stats bar with a source on every stat,
+  schematic world map with numbered pins, UTC timeline, DATE CHECK box,
+  sources footer. The image carries 15 distinct stories:
   3 heroes + 9 map stories + the Democrats' 258 seats (stats bar) + the EU
   sanctions and Amtrak derailment (UTC timeline).
 - `stories.json` — one record per story: source, second source, numbers,
