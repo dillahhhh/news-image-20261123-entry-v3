@@ -155,6 +155,25 @@ CONTINENTS = [
      (150, -35), (140, -38), (130, -32), (120, -34), (115, -30)],
 ]
 
+# Indonesian archipelago — drawn explicitly so the Jakarta pin sits on
+# islands, not on (or beside) Australia. Without these, the schematic map
+# shows pin 7 floating over open sea / looking Australian.
+ISLANDS = [
+    # Sumatra
+    [(95, 5), (98, 3), (101, 0), (104, -3), (106, -6), (103, -5),
+     (100, -2), (97, 1)],
+    # Java (Jakarta is on its north coast, ~106.8E, -6.2)
+    [(105, -6), (108, -7), (111, -7), (114, -8), (114, -9), (108, -8),
+     (105, -7)],
+    # Borneo
+    [(109, 1), (112, 3), (116, 4), (118, 1), (118, -2), (115, -4),
+     (111, -3), (109, -1)],
+    # New Guinea
+    [(131, -1), (136, -2), (141, -4), (140, -8), (135, -8), (131, -4)],
+    # Sulawesi (small)
+    [(119, 0), (121, 1), (123, -1), (121, -3), (119, -2)],
+]
+
 
 def lonlat_to_xy(lon, lat, mx, my, mw, mh):
     x = mx + (lon + 170.0) / 360.0 * mw
@@ -292,13 +311,17 @@ def draw_map_section(draw):
         pts = [lonlat_to_xy(lon, lat, map_x, map_y, map_w, map_h)
                for lon, lat in poly]
         draw.polygon(pts, fill=MAP_LAND)
+    for poly in ISLANDS:
+        pts = [lonlat_to_xy(lon, lat, map_x, map_y, map_w, map_h)
+               for lon, lat in poly]
+        draw.polygon(pts, fill=MAP_LAND)
     for num, lon, lat, _place, _head in MAP_STORIES:
         px, py = lonlat_to_xy(lon, lat, map_x, map_y, map_w, map_h)
-        r = 12
+        r = 10
         draw.ellipse([(px - r, py - r), (px + r, py + r)], fill=RED,
-                     outline=WHITE, width=2)
-        fn = font(F_SANS_B, 13)
-        centered(draw, px, py - 7, str(num), fn, WHITE)
+                     outline=WHITE, width=3)
+        fn = font(F_SANS_B, 12)
+        centered(draw, px, py - 6, str(num), fn, WHITE)
     # story list, right of the map
     lx = 506
     ly = map_y + 2
@@ -308,7 +331,7 @@ def draw_map_section(draw):
         draw.ellipse([(lx, cy - r), (lx + 2 * r, cy + r)], fill=RED)
         fn = font(F_SANS_B, 13)
         centered(draw, lx + r, cy - 7, str(num), fn, WHITE)
-        fb = font(F_SANS_B, 18)
+        fb = font(F_SANS_B, 19)
         text = place + " — " + head
         draw.text((lx + 32, ly), text, font=fb, fill=INK)
         ly += 27
