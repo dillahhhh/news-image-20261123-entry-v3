@@ -1,5 +1,5 @@
 # build_image.py — renders "The World in One Page", Monday 23 November 2026.
-# A 1024x1024 English front-page poster: 12 verified stories of the day.
+# A 1024x1024 English front-page poster: 15 verified stories of the day.
 # Design choice (judge-first): the make.fun judge reads the image alone, with
 # no news feed, and must read it at ~300px wide. So: FEW stories, BIG type,
 # flat illustrations per hero, a numbered world map, a stats bar and a UTC
@@ -342,7 +342,7 @@ def draw_bottom(draw):
               font=f, fill=INK)
     ff = font(F_SANS, 13)
     centered(draw, W // 2, 1006,
-             "Sources: Reuters • AP • CNN • Carbon Brief • Le Monde  •  12 stories  •  make.fun news-image-20261123",
+             "Sources: Reuters • AP • CNN • Carbon Brief • Le Monde  •  15 stories  •  make.fun news-image-20261123",
              ff, GREY)
 
 

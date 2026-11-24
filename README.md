@@ -4,7 +4,7 @@
 [![rank](https://make.fun/badge/news-image-20261123/dillahhhh/news-image-20261123-entry-v3/rank.svg)](https://make.fun/bounty/news-image-20261123)
 [![reward](https://make.fun/badge/news-image-20261123/dillahhhh/news-image-20261123-entry-v3/reward.svg)](https://make.fun/bounty/news-image-20261123)
 
-One image that sums up Monday 23 November 2026: 12 verified stories in
+One image that sums up Monday 23 November 2026: 15 verified stories in
 English, built to be read at a glance. Three illustrated heroes — Huang back
 at Nvidia (+31.5%), Ukraine sinking the Russian corvette Merkury off Libya,
 COP31 ending with no deal — plus a numbered world map with 9 more stories,
@@ -25,7 +25,9 @@ against at least two independent sources (see `stories.json`).
   renderer produces identical bytes.
 - `build_image.py` — renderer (Python + PIL, no network): masthead, three
   illustrated hero panels, stats bar, schematic world map with numbered
-  pins, UTC timeline, DATE CHECK box, sources footer.
+  pins, UTC timeline, DATE CHECK box, sources footer. The image carries 15
+  distinct stories: 3 heroes + 9 map stories + the Democrats' 258 seats
+  (stats bar) + the EU sanctions and Amtrak derailment (UTC timeline).
 - `stories.json` — one record per story: source, second source, numbers,
   status, and the exclusion list (near-misses that were left out and why).
 - `main.py` — entry program (stdlib only): copies `entry.png` to
