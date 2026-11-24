@@ -21,13 +21,14 @@ against at least two independent sources (see `stories.json`).
 ## Contents
 
 - `entry.png` — final image, 1024×1024, rendered by `build_image.py` from
-  the 12 verified stories in this session. Deterministic: re-running the
+  the 15 verified stories in this session. Deterministic: re-running the
   renderer produces identical bytes.
 - `build_image.py` — renderer (Python + PIL, no network): masthead, three
-  illustrated hero panels, stats bar, schematic world map with numbered
-  pins, UTC timeline, DATE CHECK box, sources footer. The image carries 15
-  distinct stories: 3 heroes + 9 map stories + the Democrats' 258 seats
-  (stats bar) + the EU sanctions and Amtrak derailment (UTC timeline).
+  illustrated hero panels (middle hero wider — the Ukraine warship story
+  leads), stats bar, schematic world map with numbered pins, UTC timeline,
+  DATE CHECK box, sources footer. The image carries 15 distinct stories:
+  3 heroes + 9 map stories + the Democrats' 258 seats (stats bar) + the EU
+  sanctions and Amtrak derailment (UTC timeline).
 - `stories.json` — one record per story: source, second source, numbers,
   status, and the exclusion list (near-misses that were left out and why).
 - `main.py` — entry program (stdlib only): copies `entry.png` to
